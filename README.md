@@ -187,8 +187,8 @@ print(flip_coin(seed=42))  # Always "Heads"
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Sonia-ship-it/pybasics-kit.git
-   cd pybasics-kit
+   git clone https://github.com/Sonia-ship-it/-pybasics-kit.git
+   cd -pybasics-kit
    ```
 
 2. **Create and activate a virtual environment**:
