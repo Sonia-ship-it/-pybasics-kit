@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pybasics-kit"
+version = "0.1.0"
+description = "A lightweight Swiss Army Knife utility library for everyday Python workflows."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "Sonia-ship-it" }
+]
+keywords = ["utilities", "helpers", "math", "text", "conversion", "games", "beginner"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/Sonia-ship-it/pybasics-kit"
+"Documentation" = "https://github.com/Sonia-ship-it/pybasics-kit#readme"
+"Bug Tracker" = "https://github.com/Sonia-ship-it/pybasics-kit/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "build>=1.0.0",
+    "twine>=5.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
