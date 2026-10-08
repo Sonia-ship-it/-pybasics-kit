@@ -28,9 +28,9 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-"Homepage" = "https://github.com/Sonia-ship-it/pybasics-kit"
-"Documentation" = "https://github.com/Sonia-ship-it/pybasics-kit#readme"
-"Bug Tracker" = "https://github.com/Sonia-ship-it/pybasics-kit/issues"
+"Homepage" = "https://github.com/Sonia-ship-it/-pybasics-kit"
+"Documentation" = "https://github.com/Sonia-ship-it/-pybasics-kit#readme"
+"Bug Tracker" = "https://github.com/Sonia-ship-it/-pybasics-kit/issues"
 
 [project.optional-dependencies]
 dev = [

@@ -20,6 +20,6 @@ Use this interactive checklist to verify every milestone of your lab assignment 
 - [x] Package installed from TestPyPI in a fresh environment (`python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pybasics-kit`)
 - [x] Package functions tested and verified in Python REPL / test script
 - [x] GitHub repository created locally (`git init`, commit on branch main)
-- [ ] GitHub repository link ready (push to `https://github.com/Sonia-ship-it/pybasics-kit`)
+- [x] GitHub repository link ready: `https://github.com/Sonia-ship-it/-pybasics-kit`
 - [x] TestPyPI package link ready: `https://test.pypi.org/project/pybasics-kit/`
 - [ ] Terminal output screenshot captured (showing tests passing, build success, and TestPyPI upload/install)
