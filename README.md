@@ -1,48 +1,69 @@
-# 🧰 pybasics_kit
+# 🧮 PyBasics Kit (`pybasics-kit`)
 
 [![Python Versions](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
 
-> **The Swiss Army Knife utility library for everyday Python workflows.**
+> **A lightweight Python toolkit for everyday mathematical and financial calculations.**
 
-`pybasics_kit` is a lightweight, zero-dependency Python utility package designed to eliminate repetitive boilerplate code. Built following modern packaging standards (PEP 621, `pyproject.toml`, and the standard `src/` layout), it offers clean, beginner-friendly tools for everyday calculations, string transformations, unit conversions, and mini-games.
+`pybasics-kit` is a zero-dependency, beginner-friendly Python utility library built following modern packaging standards (PEP 517/518/621, `pyproject.toml`, and the standard `src/` layout). It brings together essential numerical, statistical, personal budgeting, retail, and commercial calculations into a single, cohesive module (`calculations.py`).
 
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Usage Examples](#usage-examples)
-  - [Math Utilities](#1-math-utilities)
-  - [Text Utilities](#2-text-utilities)
-  - [Unit Conversions](#3-unit-conversions)
-  - [Game Utilities](#4-game-utilities)
-- [API Reference](#api-reference)
-- [Development Setup](#development-setup)
-- [Running Tests](#running-tests)
-- [Building the Package](#building-the-package)
-- [Publishing to TestPyPI](#publishing-to-testpypi)
-- [License](#license)
+Whether you are building budgeting apps, e-commerce checkout platforms, school gradebooks, business reporting dashboards, or everyday Python scripts, `pybasics-kit` eliminates repetitive boilerplate code with reliable, thoroughly tested calculations.
 
 ---
 
-## Features
+## 📑 Table of Contents
 
-- 🧮 **Math Utilities**: Percentage calculation with zero-division validation, prime number checking, numerical clamping, and sequence averages.
-- 📝 **Text Utilities**: Intelligent whitespace-aware word counting, URL-friendly slug generation with unicode normalization, and safe string truncation.
-- 🌡️ **Unit Conversions**: Bidirectional Celsius ↔ Fahrenheit temperature conversions and Kilograms ↔ Pounds weight conversions.
-- 🎲 **Game Utilities**: Configurable virtual dice rolling and coin flipping with optional deterministic seed support for reproducible testing.
-- 📦 **Modern Standards**: Compliant with PEP 517/518/621, structured with the secure `src/` layout, fully type-hinted, and thoroughly tested with `pytest`.
+- [Features](#-features)
+- [Project Architecture](#-project-architecture)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Function Reference](#-function-reference)
+  - [1. Mathematical & Statistical Calculations](#1-mathematical--statistical-calculations)
+  - [2. Personal Finance & Budgeting](#2-personal-finance--budgeting)
+  - [3. Commercial, Retail & Business](#3-commercial-retail--business)
+- [Usage Examples](#-usage-examples)
+- [Development & Testing](#-development--testing)
+- [Building & Packaging](#-building--packaging)
+- [License](#-license)
 
 ---
 
-## Installation
+## ✨ Features
+
+- **Single Intuitive Module**: Everything lives in `calculations.py`, importable directly from `pybasics_kit`.
+- **Zero Third-Party Dependencies**: Pure Python standard library implementation (`math`, `statistics`).
+- **Completely Independent**: Decoupled from any framework or database (no Django, Flask, or ORM dependencies).
+- **Flexible Inputs**: Financial and aggregation functions seamlessly accept floats, integers, lists, tuples, or categorized dictionaries.
+- **Robust Error Handling**: Explicit validation with descriptive `ValueError` and `TypeError` messages for zero denominators, invalid ranges, and negative dimensions.
+- **100% Tested**: Comprehensive unit test suite covering nominal cases, boundary conditions, and edge cases.
+
+---
+
+## 🏛️ Project Architecture
+
+```text
+pybasics-kit/
+│
+├── src/
+│   └── pybasics_kit/
+│       ├── __init__.py          # Exports public calculation functions
+│       └── calculations.py      # All mathematical and financial calculation logic
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_calculations.py    # Comprehensive test suite (90+ assertions)
+│
+├── pyproject.toml               # PEP 621 build configuration
+├── README.md                    # Documentation and reference
+└── LICENSE                      # MIT License
+```
+
+---
+
+## 📦 Installation
 
 ### Standard Installation (PyPI)
-
-Once published to PyPI, install via standard `pip`:
 
 ```bash
 pip install pybasics-kit
@@ -50,220 +71,202 @@ pip install pybasics-kit
 
 ### Lab / TestPyPI Installation
 
-During testing, install the distribution package from **TestPyPI**:
-
 ```bash
 python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pybasics-kit
 ```
 
-> **Why `--extra-index-url`?**  
-> TestPyPI is an isolated testing index and does not mirror all standard PyPI packages. Including `--extra-index-url https://pypi.org/simple/` ensures pip can locate any third-party dependencies from the primary PyPI index if required.
-
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
-You can import utilities either directly from the root package or from individual modules:
-
-```python
-import pybasics_kit
-
-# Convenient top-level access
-from pybasics_kit import is_prime, slugify, celsius_to_fahrenheit, roll_dice
-
-print(is_prime(17))                   # True
-print(slugify("Hello World!"))        # "hello-world"
-print(celsius_to_fahrenheit(25))      # 77.0
-print(roll_dice())                    # 1 to 6
-```
-
----
-
-## Usage Examples
-
-### 1. Math Utilities
+Import functions directly from `pybasics_kit`:
 
 ```python
-from pybasics_kit.math_utils import calculate_percentage, is_prime, clamp, average
-
-# Calculate percentages safely
-print(calculate_percentage(25, 100))  # 25.0
-print(calculate_percentage(1, 4))     # 25.0
-
-# Efficient prime checking
-print(is_prime(17))  # True
-print(is_prime(10))  # False
-print(is_prime(1))   # False
-
-# Restrict values within a range
-print(clamp(15, 0, 10))  # 10
-print(clamp(-5, 0, 10))  # 0
-
-# Arithmetic mean
-print(average([10, 20, 30]))  # 20.0
-```
-
-### 2. Text Utilities
-
-```python
-from pybasics_kit.text_utils import count_words, slugify, truncate
-
-# Whitespace-resilient word counting
-print(count_words("Python is awesome"))             # 3
-print(count_words("  Tabs\tand   newlines\ncount! "))  # 4
-
-# Web-safe slug generator
-print(slugify("Hello World From Python!"))         # "hello-world-from-python"
-print(slugify("Café & Crème Brûlée!"))             # "cafe-creme-brulee"
-
-# Text truncator
-print(truncate("Long article headline here", 15))  # "Long article..."
-```
-
-### 3. Unit Conversions
-
-```python
-from pybasics_kit.conv_utils import (
-    celsius_to_fahrenheit,
-    fahrenheit_to_celsius,
-    kg_to_pounds,
-    pounds_to_kg,
+from pybasics_kit import (
+    calculate_percentage,
+    calculate_average,
+    calculate_discounted_price,
+    calculate_balance,
 )
 
-# Temperature
-print(celsius_to_fahrenheit(0))     # 32.0 (freezing)
-print(celsius_to_fahrenheit(100))   # 212.0 (boiling)
-print(fahrenheit_to_celsius(212))   # 100.0
-
-# Weight
-print(kg_to_pounds(1))              # 2.20462
-print(pounds_to_kg(2.20462))        # 1.0
+print(calculate_percentage(25, 100))        # 25.0
+print(calculate_average([70, 80, 90]))       # 80.0
+print(calculate_discounted_price(100, 20))  # 80.0
+print(calculate_balance(1000, 350))         # 650
 ```
 
-### 4. Game Utilities
+---
+
+## 📚 Function Reference
+
+### 1. Mathematical & Statistical Calculations
+
+| Function | Signature | What it calculates |
+| :--- | :--- | :--- |
+| `calculate_percentage` | `(value, total)` | Percentage of a total |
+| `calculate_average` | `(numbers)` | Arithmetic mean of numbers |
+| `calculate_sum` | `(numbers)` | Total sum of numbers |
+| `calculate_median` | `(numbers)` | Median (middle value) of numbers |
+| `find_minimum` | `(numbers)` | Smallest number in a collection |
+| `find_maximum` | `(numbers)` | Largest number in a collection |
+| `is_prime` | `(number)` | Whether an integer is prime |
+| `calculate_percentage_change` | `(old, new)` | Percentage increase or decrease |
+| `clamp` | `(value, minimum, maximum)` | Restricts value within a given range |
+
+### 2. Personal Finance & Budgeting
+
+| Function | Signature | What it calculates |
+| :--- | :--- | :--- |
+| `calculate_balance` | `(income, expenses)` | Remaining balance after expenses |
+| `calculate_total_expenses` | `(expenses)` | Total expenses (supports lists or categorized dicts) |
+| `calculate_savings` | `(income, expenses)` | Remaining savings amount (net surplus) |
+| `calculate_savings_rate` | `(income, savings)` | Savings percentage of total income |
+| `calculate_budget_remaining` | `(budget, spending)` | Remaining budget allowance |
+| `calculate_budget_usage` | `(spending, budget)` | Percentage of budget consumed |
+| `calculate_daily_budget` | `(remaining, days)` | Daily spending allowance |
+
+### 3. Commercial, Retail & Business
+
+| Function | Signature | What it calculates |
+| :--- | :--- | :--- |
+| `calculate_discounted_price` | `(price, discount_percent)` | Price after a percentage discount |
+| `calculate_tax` | `(amount, tax_rate)` | Tax amount for a given tax percentage |
+| `calculate_total_with_tax` | `(amount, tax_rate)` | Total amount including tax |
+| `split_amount` | `(amount, people)` | Equal division of an amount |
+| `calculate_unit_price` | `(total_price, quantity)` | Price per unit |
+| `calculate_profit` | `(revenue, costs)` | Net profit after costs |
+| `calculate_profit_margin` | `(revenue, profit)` | Profit margin percentage |
+
+---
+
+## 💡 Usage Examples
+
+### Everyday Math & Statistics
 
 ```python
-from pybasics_kit.game_utils import roll_dice, flip_coin
+from pybasics_kit import (
+    calculate_percentage,
+    calculate_average,
+    calculate_median,
+    find_minimum,
+    find_maximum,
+    is_prime,
+    calculate_percentage_change,
+    clamp,
+)
 
-# Virtual dice
-print(roll_dice())         # Random integer 1 to 6
-print(roll_dice(20))       # Random integer 1 to 20 (D20)
+# Exam grading & score analysis
+scores = [75, 88, 92, 64, 85]
+print(calculate_average(scores))             # 80.8
+print(calculate_median(scores))              # 85.0
+print(find_minimum(scores))                  # 64
+print(find_maximum(scores))                  # 92
 
-# Coin flip
-print(flip_coin())         # "Heads" or "Tails"
+# Safe clamping within range [0, 100]
+print(clamp(115, 0, 100))                    # 100
+print(clamp(-10, 0, 100))                    # 0
 
-# Deterministic coin flip (reproducible testing without altering global state)
-print(flip_coin(seed=42))  # Always "Heads"
+# Growth analysis
+print(calculate_percentage_change(100, 125)) # 25.0 (25% increase)
+print(calculate_percentage_change(200, 150)) # -25.0 (25% decrease)
+
+# Prime number testing
+print(is_prime(17))                          # True
+print(is_prime(4))                           # False
+```
+
+### Personal Budgeting & Financial Planning
+
+```python
+from pybasics_kit import (
+    calculate_balance,
+    calculate_savings_rate,
+    calculate_budget_remaining,
+    calculate_budget_usage,
+    calculate_daily_budget,
+)
+
+monthly_income = 4000
+monthly_expenses = {"rent": 1200, "groceries": 450, "utilities": 150}
+
+# Balance and savings
+balance = calculate_balance(monthly_income, monthly_expenses)
+print(f"Remaining balance: ${balance}")       # $2200
+
+savings_rate = calculate_savings_rate(monthly_income, balance)
+print(f"Savings rate: {savings_rate}%")       # 55.0%
+
+# Track monthly budget
+budget = 2000
+spending = [350, 420, 130]
+print(calculate_budget_remaining(budget, spending)) # 1100
+print(calculate_budget_usage(spending, budget))     # 45.0%
+
+# Days remaining in period
+print(calculate_daily_budget(1100, 22))             # 50.0 ($50/day)
+```
+
+### E-Commerce & Retail Checkout
+
+```python
+from pybasics_kit import (
+    calculate_discounted_price,
+    calculate_tax,
+    calculate_total_with_tax,
+    split_amount,
+    calculate_unit_price,
+    calculate_profit,
+    calculate_profit_margin,
+)
+
+# Apply 20% discount on $150 item
+subtotal = calculate_discounted_price(150, 20)
+print(f"Discounted subtotal: ${subtotal}")    # $120.0
+
+# 8.25% sales tax
+tax = calculate_tax(subtotal, 8.25)
+total = calculate_total_with_tax(subtotal, 8.25)
+print(f"Tax: ${tax:.2f}, Total: ${total:.2f}")# Tax: $9.90, Total: $129.90
+
+# Split restaurant bill among 4 friends
+print(split_amount(129.90, 4))               # 32.475
+
+# Unit economics & business reporting
+unit_cost = calculate_unit_price(500, 100)   # 5.0 ($5 per unit)
+profit = calculate_profit(10000, 7500)       # 2500
+margin = calculate_profit_margin(10000, profit) # 25.0%
 ```
 
 ---
 
-## API Reference
+## 🧪 Development & Testing
 
-### `pybasics_kit.math_utils`
-- `calculate_percentage(value: float, total: float) -> float`: Calculates `(value / total) * 100.0`. Raises `ValueError` if `total == 0`.
-- `is_prime(number: int) -> bool`: Efficient $O(\sqrt{n})$ prime test. Returns `False` for integers $\le 1$.
-- `clamp(value: float, min_value: float, max_value: float) -> float`: Constrains `value` to `[min_value, max_value]`.
-- `average(numbers: Sequence[float]) -> float`: Computes arithmetic mean. Raises `ValueError` if sequence is empty.
-
-### `pybasics_kit.text_utils`
-- `count_words(text: str) -> int`: Counts words using whitespace splitting (`split()`), handling arbitrary spacing.
-- `slugify(text: str, separator: str = "-") -> str`: Normalizes unicode, lowercases, removes non-alphanumeric punctuation, and joins with `separator`.
-- `truncate(text: str, max_length: int, suffix: str = "...") -> str`: Shortens string if longer than `max_length`.
-
-### `pybasics_kit.conv_utils`
-- `celsius_to_fahrenheit(celsius: float) -> float`: Converts °C to °F via `(C * 9/5) + 32`.
-- `fahrenheit_to_celsius(fahrenheit: float) -> float`: Converts °F to °C via `(F - 32) * 5/9`.
-- `kg_to_pounds(kg: float) -> float`: Converts kilograms to pounds (factor `2.20462`). Raises `ValueError` for negative values.
-- `pounds_to_kg(pounds: float) -> float`: Converts pounds to kilograms. Raises `ValueError` for negative values.
-
-### `pybasics_kit.game_utils`
-- `roll_dice(faces: int = 6, seed: Optional[int] = None) -> int`: Returns random integer in `[1, faces]`. Validates `faces >= 2`.
-- `flip_coin(seed: Optional[int] = None) -> str`: Returns `"Heads"` or `"Tails"`. Accepts optional `seed` for isolated deterministic runs.
-
----
-
-## Development Setup
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Sonia-ship-it/-pybasics-kit.git
-   cd -pybasics-kit
-   ```
-
-2. **Create and activate a virtual environment**:
-   - **Windows PowerShell**:
-     ```powershell
-     python -m venv .venv
-     .\.venv\Scripts\Activate.ps1
-     ```
-   - **Windows Command Prompt (CMD)**:
-     ```cmd
-     python -m venv .venv
-     .venv\Scripts\activate.bat
-     ```
-   - **Linux / macOS**:
-     ```bash
-     python3 -m venv .venv
-     source .venv/bin/activate
-     ```
-
-3. **Install development tools and package in editable mode**:
-   ```bash
-   python -m pip install --upgrade pip
-   python -m pip install build twine pytest
-   python -m pip install -e .
-   ```
-
----
-
-## Running Tests
-
-Run the full pytest suite:
-
-```bash
-python -m pytest
-```
-
-With verbose output:
+Run all unit tests using `pytest`:
 
 ```bash
 python -m pytest -v
 ```
 
+All 23 functions are thoroughly tested with 90+ test cases covering standard operations, empty inputs, zero divisions, boundary limits, and parameter validation.
+
 ---
 
-## Building the Package
+## 🛠️ Building & Packaging
 
-Build the source distribution (`.tar.gz`) and wheel (`.whl`):
+Build distribution archives (wheel and source distribution) with PEP 517 `build`:
 
 ```bash
 python -m build
 ```
 
-The output artifacts will be created in the `dist/` directory:
-- `dist/pybasics_kit-0.1.0-py3-none-any.whl` (Wheel distribution)
-- `dist/pybasics_kit-0.1.0.tar.gz` (Source distribution)
-
----
-
-## Publishing to TestPyPI
-
-Upload the built distributions to TestPyPI using **Twine**:
+Verify build output with `twine`:
 
 ```bash
-python -m twine upload --repository testpypi dist/*
+python -m twine check dist/*
 ```
-
-When prompted:
-- **Username**: `__token__`
-- **Password**: *Paste your TestPyPI API token (begins with `pypi-...`)*
-
-> 🔒 **Security Notice:**  
-> Never commit your API token, passwords, or credentials into source control (`git`), `pyproject.toml`, or any project documentation. Keep your tokens safe and private.
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).

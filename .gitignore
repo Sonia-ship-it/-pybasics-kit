@@ -16,8 +16,6 @@ ENV/
 env/
 
 # Environment variables
-.env
-.env.local
 
 # Testing and coverage
 .pytest_cache/
@@ -25,7 +23,6 @@ env/
 htmlcov/
 
 # IDE and Editor files
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -36,3 +33,5 @@ Thumbs.db
 branch_structure.json
 temp_auto_push.bat
 temp_interactive_push.bat
+config.bat
+node_modules
