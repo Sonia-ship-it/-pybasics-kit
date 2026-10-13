@@ -8,7 +8,7 @@ Use this interactive checklist to verify every milestone of your lab assignment 
 - [x] twine installed (`python -m pip install twine`)
 - [x] pytest installed (`python -m pip install pytest`)
 - [x] Project structure created (using modern `src/` layout)
-- [x] Python modules implemented (`math_utils.py`, `text_utils.py`, `conv_utils.py`, `game_utils.py`)
+- [x] Python module implemented (`calculations.py` with 23 mathematical & financial calculation utilities)
 - [x] Tests written (comprehensive test coverage in `tests/`)
 - [x] All tests passing (`python -m pytest -v`)
 - [x] pyproject.toml configured (PEP 621 compliant with setuptools build-backend)
